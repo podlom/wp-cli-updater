@@ -12,6 +12,8 @@ class AbstractCommand implements Command
 
     protected $status = 0;
 
+    protected ?Environment $environment = null;
+
     /**
      * @var string Command to execute.
      */
@@ -59,5 +61,21 @@ class AbstractCommand implements Command
     public function getStatus(): int
     {
         return $this->status;
+    }
+
+    /**
+     * @return Environment|null
+     */
+    public function getEnvironment(): ?Environment
+    {
+        return $this->environment;
+    }
+
+    /**
+     * @param Environment|null $environment
+     */
+    public function setEnvironment(?Environment $environment): void
+    {
+        $this->environment = $environment;
     }
 }
