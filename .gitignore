@@ -1,0 +1,7 @@
+# ignore all php config files
+config/*.php
+# except
+!config/environments.sample.php
+
+# ignore phpStorm IDE connfig folder
+.idea/*
