@@ -13,14 +13,13 @@ spl_autoload_register(function ($className) {
     return false;
 });
 
-$environents = [
-    1 => [1, 'shkodenko.com', 'ssh', 'phpacd', '104.236.235.165', '/home/phpacd/websites/shkodenko.com'],
-    2 => [2, 'blog.shkodenko.com.ua', 'ssh', 'phpacd', '104.236.235.165', '/home/phpacd/websites/blog.shkodenko.com.ua'],
-];
-
+$environents = require_once 'config/environments.php';
+if (empty($environents) && !is_array($environents)) {
+    echo 'Error: empty config/environments.php' . PHP_EOL;
+    exit(1);
+}
 
 $envId = intval($argv[1]);
-
 if ($envId > 0) {
     echo __FILE__ . ' +' . __LINE__ . ' $envId: ' . var_export($envId, true);
     if (isset($environents[$envId])) {
@@ -29,6 +28,9 @@ if ($envId > 0) {
         $command = new ShellUpdatePluginsCommand("/usr/local/bin/wp plugin list", $env);
         echo '#--- execute commmand: ' . PHP_EOL;
         $command->execute();
+    } else {
+        echo 'Error: requested evirontment ID was not found in config/environments.php' . PHP_EOL;
+        exit(2);
     }
 } else {
     echo 'Usage: php ' . $argv[0] . ' envID' . PHP_EOL;
