@@ -6,7 +6,7 @@ namespace podlom\wpCliUpdater;
 use podlom\wpCliUpdater\AbstractCommand;
 
 
-final class ShellPluginsListCommand extends AbstractCommand
+final class ShellThemeListCommand extends AbstractCommand
 {
     private $result;
 
@@ -33,7 +33,7 @@ final class ShellPluginsListCommand extends AbstractCommand
         $this->result = shell_exec($command);
 
         if (!empty($this->result)) {
-            echo __METHOD__ . ' +' . __LINE__ . ' Plugin List command result: ' . PHP_EOL . var_export($this->result, true) . PHP_EOL;
+            echo __METHOD__ . ' +' . __LINE__ . ' Theme List command result: ' . PHP_EOL . var_export($this->result, true) . PHP_EOL;
         } else {
             echo __METHOD__ . ' +' . __LINE__ . ' No results. Server did not respond.' . PHP_EOL;
         }
