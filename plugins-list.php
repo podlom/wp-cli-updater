@@ -25,7 +25,7 @@ if ($envId > 0) {
     if (isset($environents[$envId])) {
         $env = new Environment($environents[$envId][0], $environents[$envId][1], $environents[$envId][2], $environents[$envId][3], $environents[$envId][4], $environents[$envId][5]);
 
-        $command = new ShellPluginsCommand("/usr/local/bin/wp plugin list", $env);
+        $command = new ShellPluginsListCommand("/usr/local/bin/wp plugin list", $env);
         echo '#--- execute commmand: ' . PHP_EOL;
         $command->execute();
     } else {
