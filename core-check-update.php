@@ -1,17 +1,13 @@
 <?php
+/**
+ * @author    Taras Shkodenko <taras@shkodenko.com>
+ * @copyright Shkodenko V. Taras, https://www.shkodenko.com/
+ */
 
 namespace podlom\wpCliUpdater;
 
-spl_autoload_register(function ($className) {
-    $file = str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
-    $file = str_replace('podlom/wpCliUpdater', __DIR__ . '/src/podlom/wpCliUpdater', $file);
-    if (file_exists($file)) {
-        require_once $file;
-        return true;
-    }
 
-    return false;
-});
+require_once 'src/_autoload.php';
 
 $environents = require_once 'config/environments.php';
 if (empty($environents) && !is_array($environents)) {
@@ -24,7 +20,7 @@ if (isset($argv[1]) && !empty($argv[1])) {
     $envId = intval($argv[1]);
 }
 if ($envId > 0) {
-    echo __FILE__ . ' +' . __LINE__ . ' $envId: ' . var_export($envId, true) . PHP_EOL;
+    echo __FILE__ . ' +' . __LINE__ . ' $envId: ' . var_export($envId, true) . ' (' . $environents[$envId][1] . ')' . PHP_EOL;
     if (isset($environents[$envId])) {
         $env = new Environment($environents[$envId][0], $environents[$envId][1], $environents[$envId][2], $environents[$envId][3], $environents[$envId][4], $environents[$envId][5]);
 

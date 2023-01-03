@@ -1,6 +1,11 @@
 <?php
+/**
+ * @author    Taras Shkodenko <taras@shkodenko.com>
+ * @copyright Shkodenko V. Taras, https://www.shkodenko.com/
+ */
 
 namespace podlom\wpCliUpdater;
+
 
 class Environment
 {
@@ -124,7 +129,6 @@ class Environment
 
     public function prepareCommand(string $command): string
     {
-        echo __METHOD__ . ' +' . __LINE__ . ' $command: ' . var_export($command, true) . PHP_EOL . PHP_EOL;
         $modifiedCommand = $command;
         if ($this->type == 'ssh') {
             if (!empty($this->user)) {
@@ -137,7 +141,6 @@ class Environment
             } else {
                 $modifiedCommand .= "'" . $command . "'";
             }
-            echo __METHOD__ . ' +' . __LINE__ . ' $modifiedCommand: ' . var_export($modifiedCommand, true) . PHP_EOL;
         }
 
         return $modifiedCommand;

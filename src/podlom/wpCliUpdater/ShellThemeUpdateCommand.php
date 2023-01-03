@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author    Taras Shkodenko <taras@shkodenko.com>
+ * @copyright Shkodenko V. Taras, https://www.shkodenko.com/
+ */
 
 namespace podlom\wpCliUpdater;
 
@@ -6,7 +10,7 @@ namespace podlom\wpCliUpdater;
 use podlom\wpCliUpdater\AbstractCommand;
 
 
-final class ShellUpdatePluginsCommand extends AbstractCommand
+final class ShellThemeUpdateCommand extends AbstractCommand
 {
     private $result;
 
@@ -28,7 +32,7 @@ final class ShellUpdatePluginsCommand extends AbstractCommand
 
     public function execute(): void
     {
-        // $command = escapeshellcmd($this->getCommand());
+        // TODO: check if we have to escape shell like: $command = escapeshellcmd($this->getCommand());
         $command = $this->getCommand();
         echo __METHOD__ . ' +' . __LINE__ . ' Original command: ' . var_export($command, true) . PHP_EOL . PHP_EOL;
         $command = $this->environment->prepareCommand($command);
@@ -53,20 +57,20 @@ final class ShellUpdatePluginsCommand extends AbstractCommand
             }
         }
         if (!empty($updateAvailable)) {
-            echo __METHOD__ . ' +' . __LINE__ . ' Update available for plugins: ' . var_export($updateAvailable, true) . PHP_EOL;
+            echo __METHOD__ . ' +' . __LINE__ . ' Update available for themes: ' . var_export($updateAvailable, true) . PHP_EOL;
 
-            foreach ($updateAvailable as $plugin) {
-                $updatePluginCommand = "/usr/local/bin/wp plugin update {$plugin[0]}";
-                echo __METHOD__ . ' +' . __LINE__ . ' Original update command: ' . var_export($updatePluginCommand, true) . PHP_EOL . PHP_EOL;
-                $updatePluginCommand = $this->environment->prepareCommand($updatePluginCommand);
-                echo __METHOD__ . ' +' . __LINE__ . ' Fixed update command: ' . var_export($updatePluginCommand, true) . PHP_EOL . PHP_EOL;
-                $this->setCommand($updatePluginCommand);
+            foreach ($updateAvailable as $theme) {
+                $updateThemeCommand = "/usr/local/bin/wp theme update {$theme[0]}";
+                echo __METHOD__ . ' +' . __LINE__ . ' Original update command: ' . var_export($updateThemeCommand, true) . PHP_EOL . PHP_EOL;
+                $updateThemeCommand = $this->environment->prepareCommand($updateThemeCommand);
+                echo __METHOD__ . ' +' . __LINE__ . ' Fixed update command: ' . var_export($updateThemeCommand, true) . PHP_EOL . PHP_EOL;
+                $this->setCommand($updateThemeCommand);
                 //
-                echo __METHOD__ . ' +' . __LINE__ . ' Executing update command: ' . var_export($updatePluginCommand, true) . ' ...' . PHP_EOL;
-                $this->result = shell_exec($updatePluginCommand);
+                echo __METHOD__ . ' +' . __LINE__ . ' Executing update theme command: ' . var_export($updateThemeCommand, true) . ' ...' . PHP_EOL;
+                $this->result = shell_exec($updateThemeCommand);
             }
         } else {
-            echo __METHOD__ . ' +' . __LINE__ . ' All plugins are up-to-date.' . PHP_EOL;
+            echo __METHOD__ . ' +' . __LINE__ . ' All themes are up-to-date.' . PHP_EOL;
         }
 
         parent::execute();
