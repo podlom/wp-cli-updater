@@ -20,8 +20,8 @@ if (isset($argv[1]) && !empty($argv[1])) {
     $envId = intval($argv[1]);
 }
 if ($envId > 0) {
-    echo __FILE__ . ' +' . __LINE__ . ' $envId: ' . var_export($envId, true) . ' (' . $environents[$envId][1] . ')' . PHP_EOL;
     if (isset($environents[$envId])) {
+        echo __FILE__ . ' +' . __LINE__ . ' $envId: ' . var_export($envId, true) . ' (' . $environents[$envId][1] . ')' . PHP_EOL;
         $env = new Environment($environents[$envId][0], $environents[$envId][1], $environents[$envId][2], $environents[$envId][3], $environents[$envId][4], $environents[$envId][5]);
 
         $command = new ShellLangUpdateCommand("/usr/local/bin/wp language core list --status=active", $env);
