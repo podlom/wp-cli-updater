@@ -10,4 +10,12 @@
  *
  * ```
  *
+ * podlom\wpCliUpdater\Environment
+ * $this->id = $id;
+ * $this->name = $name;
+ * $this->type = $type;
+ * $this->user = $user;
+ * $this->host = $host;
+ * $this->path = $path;
+ *
  */
