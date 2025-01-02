@@ -39,7 +39,7 @@ final class ShellLangUpdateCommand extends AbstractCommand
         echo __METHOD__ . ' +' . __LINE__ . ' Executing command: ' . var_export($command, true) . ' ...' . PHP_EOL;
         $this->result = shell_exec($command);
 
-        $updateLanguageCommand = "/usr/local/bin/wp language core update && /usr/local/bin/wp language theme --all update && /usr/local/bin/wp language plugin --all update";
+        $updateLanguageCommand = "/usr/local/bin/wp language core update && /usr/local/bin/wp language theme update --all && /usr/local/bin/wp language plugin update --all";
         echo __METHOD__ . ' +' . __LINE__ . ' Original update command: ' . var_export($updateLanguageCommand, true) . PHP_EOL . PHP_EOL;
         $updateLanguageCommand = $this->environment->prepareCommand($updateLanguageCommand);
         echo __METHOD__ . ' +' . __LINE__ . ' Fixed update command: ' . var_export($updateLanguageCommand, true) . PHP_EOL . PHP_EOL;

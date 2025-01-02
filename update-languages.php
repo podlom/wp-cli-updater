@@ -25,7 +25,11 @@ if ($envId > 0) {
         $env = new Environment($environents[$envId][0], $environents[$envId][1], $environents[$envId][2], $environents[$envId][3], $environents[$envId][4], $environents[$envId][5]);
 
         $command = new ShellLangUpdateCommand("/usr/local/bin/wp language core list --status=active", $env);
-        echo '#--- execute commmand: ' . PHP_EOL;
+        echo '#--- execute commmand (1): ' . PHP_EOL;
+        $command->execute();
+
+        $command = new ShellLangUpdateCommand("/usr/local/bin/wp language core list --status=installed", $env);
+        echo '#--- execute commmand (2): ' . PHP_EOL;
         $command->execute();
     } else {
         echo 'Error: requested evirontment ID was not found in config/environments.php' . PHP_EOL;
