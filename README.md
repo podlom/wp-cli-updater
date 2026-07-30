@@ -49,6 +49,25 @@ php update-plugins.php 1
 php update-themes.php 1
 ```
 
+8. Monitor WordPress CMS administrator users for security changes:
+
+```shell
+php admin-users-check.php 1
+````
+
+Accept current administrator list as a trusted baseline:
+
+```shell
+php admin-users-check.php 1 --accept
+```
+
+Get machine-readable JSON output:
+
+```shell
+php admin-users-check.php 1 --json
+```
+
+
 Note, do not forget to replace **1** in commands listed above with config **ID** configured in **config/environments.php** file
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L3L5LJ3TB)
